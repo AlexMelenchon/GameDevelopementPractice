@@ -33,11 +33,17 @@ public:
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
 	bool loadGame(pugi::xml_node&);
+	bool saveGame(pugi::xml_node&);
+
+
+
+	int generalAudio, musicAudio;
 
 private:
 
 	_Mix_Music*			music;
 	p2List<Mix_Chunk*>	fx;
+
 };
 
 #endif // __j1AUDIO_H__

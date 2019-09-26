@@ -112,3 +112,11 @@ uint j1Window::GetScale() const
 {
 	return scale;
 }
+
+
+
+bool j1Window::loadGame(pugi::xml_node& load) 
+{
+	return true;
+}
+

@@ -39,6 +39,11 @@ public:
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
 
+	bool loadGame(pugi::xml_node&);
+	bool saveGame(pugi::xml_node&);
+
+
+
 public:
 
 	SDL_Renderer*	renderer;

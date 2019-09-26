@@ -156,3 +156,8 @@ void j1Input::GetMouseMotion(int& x, int& y)
 	x = mouse_motion_x;
 	y = mouse_motion_y;
 }
+
+bool j1Input::loadGame(pugi::xml_node& load)
+{
+	return true;
+}

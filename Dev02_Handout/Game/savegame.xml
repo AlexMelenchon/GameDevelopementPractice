@@ -3,9 +3,11 @@
 	<input />
 	<window />
 	<textures />
-	<audio />
+	<audio>
+		<volume general="0" music="0" />
+	</audio>
 	<scene />
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="418" y="-38" />
 	</renderer>
 </save>

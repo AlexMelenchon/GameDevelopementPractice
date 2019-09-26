@@ -50,6 +50,11 @@ bool j1Audio::Awake(pugi::xml_node& config)
 		active = false;
 		ret = true;
 	}
+	generalAudio = config.child("volume").attribute("general").as_int();
+	musicAudio = config.child("volume").attribute("music").as_int();
+
+	Mix_Volume(-1, generalAudio);
+	Mix_VolumeMusic(musicAudio);
 
 	return ret;
 }
@@ -177,7 +182,17 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 bool j1Audio::loadGame(pugi::xml_node& load) 
 {
 
+	Mix_Volume(-1, load.child("volume").attribute("general").as_int());
+	Mix_VolumeMusic(load.child("volume").attribute("music").as_int());
 
+	return true;
+}
 
+bool j1Audio::saveGame(pugi::xml_node& load)
+{
+	pugi::xml_node vol = load.child("volume");
+	vol.attribute("general").set_value(generalAudio);
+	vol.attribute("music").set_value(musicAudio);
 
+	return true;
 }

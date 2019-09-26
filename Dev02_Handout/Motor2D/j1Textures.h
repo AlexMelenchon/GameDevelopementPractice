@@ -31,6 +31,9 @@ public:
 	SDL_Texture* const	LoadSurface(SDL_Surface* surface);
 	void				GetSize(const SDL_Texture* texture, uint& width, uint& height) const;
 
+	bool loadGame(pugi::xml_node&);
+
+
 public:
 
 	p2List<SDL_Texture*>	textures;

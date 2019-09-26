@@ -293,13 +293,11 @@ void j1App::requestLoad() {
 // then call all the modules to load themselves
 void j1App::loadGame() {
 
-	bool ret = true;
 	pugi::xml_parse_result result = config_file.load_file("savegame.xml");
 
 	if (result == NULL)
 	{
 		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
-		ret = false;
 	}
 	else
 	{
@@ -307,9 +305,9 @@ void j1App::loadGame() {
 			p2List_item<j1Module*>* item;
 			item = modules.start;
 
-			while (item != NULL && ret == true)
+			while (item != NULL)
 			{
-				ret = item->data->loadGame(config.child(item->data->name.GetString()));
+				item->data->loadGame(config.child(item->data->name.GetString()));
 				item = item->next;
 			}
 	}
@@ -319,4 +317,27 @@ void j1App::loadGame() {
 }
 
 // TODO 7: Create a method to save the current state
+void j1App::saveGame() 
+{
+	pugi::xml_document saveFile;
+	pugi::xml_parse_result result = saveFile.load_file("savegame.xml");
 
+	if (result == NULL)
+	{
+		LOG("Could not save map xml file config.xml. pugi error: %s", result.description());
+	}
+	else
+	{
+		config = saveFile.child("save");
+		p2List_item<j1Module*>* item;
+		item = modules.start;
+
+		while (item != NULL)
+		{
+			item->data->saveGame(config.child(item->data->name.GetString()));
+			item = item->next;
+		}
+	}
+
+	saveFile.save_file("savegame.xml");
+}

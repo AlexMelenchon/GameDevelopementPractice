@@ -32,6 +32,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+
+	bool loadGame(pugi::xml_node&);
+
 private:
 	SDL_Texture* img;
 };

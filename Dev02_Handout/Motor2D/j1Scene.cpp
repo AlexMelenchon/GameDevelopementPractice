@@ -62,6 +62,17 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x += 1;
 
+	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_REPEAT && App->audio->musicAudio < 100) {
+		App->audio->musicAudio++;
+		App->audio->generalAudio++;
+
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_KP_MINUS) == KEY_REPEAT && App->audio->musicAudio > 0) {
+		App->audio->musicAudio--;
+		App->audio->generalAudio--;
+	}
+
 	App->render->Blit(img, 0, 0);
 	return true;
 }
@@ -84,3 +95,12 @@ bool j1Scene::CleanUp()
 
 	return true;
 }
+
+
+
+bool j1Scene::loadGame(pugi::xml_node& load) 
+{
+
+	return true;
+}
+

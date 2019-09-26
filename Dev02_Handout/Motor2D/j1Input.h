@@ -68,6 +68,9 @@ public:
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
 
+	bool loadGame(pugi::xml_node&);
+
+
 private:
 	bool		windowEvents[WE_COUNT];
 	j1KeyState*	keyboard;
