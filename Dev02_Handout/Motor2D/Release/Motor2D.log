@@ -8,8 +8,8 @@
   j1Textures.cpp
   j1Window.cpp
   pugixml.cpp
-  Generando código
+  Generating code
   Previous IPDB not found, fall back to full compilation.
   All 324 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Generación de código finalizada
-  Motor2D.vcxproj -> C:\Users\Usuario\Documents\GitHub\GameDevelopementPractice\Dev02_Handout\Release\Motor 2D.exe
+  Finished generating code
+  Motor2D.vcxproj -> C:\Users\alexmm2\Documents\GitHub\GameDevelopementPractice\Dev02_Handout\Release\Motor 2D.exe
