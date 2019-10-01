@@ -1,0 +1,5 @@
+﻿  j1Map.cpp
+  j1Scene.cpp
+  Generando código...
+C:\Users\Usuario\Desktop\Dev_class4_handout\Motor2D\j1Map.cpp(214,21): warning C4018:  '<': no coinciden signed/unsigned
+  Motor2D.vcxproj -> C:\Users\Usuario\Desktop\Dev_class4_handout\Debug\Motor 2D.exe
