@@ -86,8 +86,8 @@ bool j1Map::Load(const char* file_name)
 		create_Tile(tileset);
 
 ;
-	for (pugi::xml_node nodeLayer = map_file.child("map").child("layer"); nodeLayer; nodeLayer = nodeLayer.next_sibling("layer"))
-			load_Layer(nodeLayer);
+		for (pugi::xml_node nodeLayer = map_file.child("map").child("layer"); nodeLayer; nodeLayer = nodeLayer.next_sibling("layer"))
+				load_Layer(nodeLayer);
 
 
 	if(ret == true)
