@@ -19,11 +19,11 @@ struct LayerInfo {
 // ----------------------------------------------------
 
 	// TODO 6: Short function to get the value of x,y
-const inline uint Get(int x, int y) {
+const inline uint Get(int x, int y, int tile_w) {
 	
-	return x * y;
-};
+	return (x + y* tile_w);
 
+};
 
 // ----------------------------------------------------
 struct TileSet
@@ -43,13 +43,8 @@ struct TileSet
 	int					num_tiles_height;
 	int					offset_x;
 	int					offset_y;
-	SDL_Rect getRect(uint tileId) {
-	
-		SDL_Rect toReturn;
-		toReturn = (0, 0, 0, 0);
-		return(toReturn);
-	
-	};
+
+	SDL_Rect getRect(uint tileId);
 };
 
 enum MapTypes

@@ -35,15 +35,16 @@ void j1Map::Draw()
 	for (p2List_item<LayerInfo*>* layerInfo = data.layerList.start; layerInfo != NULL; layerInfo = layerInfo->next)
 	{
 		//uint arraySize = layerInfo->data->width*layerInfo->data->height;
-		for (uint j = 0; j < layerInfo->data->height; j++)
+		for (uint i = 0; i < layerInfo->data->width; ++i)
 		{
-			for (uint i = 0; i < layerInfo->data->width; i++)
+			for (uint j = 0; j < layerInfo->data->height; ++j) 
 			{
-				Get(j+1,i+1);
+				uint gid = layerInfo->data->tileArray[Get(i, j, layerInfo->data->width)];
+				if(gid != 0)
+				App->render->Blit(data.tilesets.start->data->texture,i* data.tile_width, j * data.tile_height, &data.tilesets.start->data->getRect(gid));
 			}
 		}
 	}
-
 	// TODO 9: Complete the draw function
 
 }
@@ -304,14 +305,29 @@ bool j1Map::load_Layer(pugi::xml_node& node, LayerInfo* layerInfo)
 
 	uint i = 0;
 	for (pugi::xml_node tile = node.child("data").child("tile"); tile; tile = tile.next_sibling("tile")) {
-		layerInfo->tileArray[i] = tile.attribute("gid").as_uint();
+		layerInfo->tileArray[i] = tile.attribute("gid").as_uint(0);
 		++i;
 	}
-	// Array Check by LOG
-	//for (int y = 0; y < i; y++) {
-	//	LOG("Tile %d: %d \n", y + 1, layerInfo->tileArray[y]);
-	//}
+
 	data.layerList.add(layerInfo);
 
 	return true;
 }
+
+SDL_Rect TileSet::getRect(uint tileId) {
+
+	SDL_Rect toReturn;
+	
+	int relative_id = tileId - firstgid;
+
+	toReturn.w = tile_width;
+	toReturn.h = tile_height;
+
+	toReturn.x = margin + ((toReturn.w + spacing) * (relative_id % num_tiles_width));
+	toReturn.y = margin + ((toReturn.h + spacing) * (relative_id / num_tiles_width));
+
+
+
+	return(toReturn);
+};
+
