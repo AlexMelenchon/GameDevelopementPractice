@@ -39,14 +39,62 @@ void j1Map::Draw()
 		{
 			for (uint j = 0; j < layerInfo->data->height; ++j) 
 			{
-				uint gid = layerInfo->data->tileArray[Get(i, j, layerInfo->data->width)];
+				uint gid = layerInfo->data->tileArray[layerInfo->data->Get(i, j)];
+				iPoint cordinates = MapToWorld(i, j);
 				if(gid != 0)
-				App->render->Blit(data.tilesets.start->data->texture,i* data.tile_width, j * data.tile_height, &data.tilesets.start->data->getRect(gid));
+				App->render->Blit(data.tilesets.start->data->texture, cordinates.x, cordinates.y, &data.tilesets.start->data->getRect(gid));
 			}
 		}
 	}
 	// TODO 9: Complete the draw function
 
+}
+
+iPoint j1Map::MapToWorld(int x, int y) const
+{
+	iPoint ret(0, 0);
+	// TODO 8(old): Create a method that translates x,y coordinates from map positions to world positions
+
+	// TODO 1: Add isometric map to world coordinates
+	switch (data.type) {
+	case MAPTYPE_ORTHOGONAL:
+		ret.x = x * data.tile_width;
+		ret.y = y * data.tile_height;
+
+		break;
+
+	case MAPTYPE_ISOMETRIC:
+		ret.x = (x - y) * (data.tile_width * 0.5f);
+		ret.y = (x + y) * (data.tile_height * 0.5f);
+		break;
+
+
+	}
+	return ret;
+}
+
+
+iPoint j1Map::WorldToMap(int x, int y) const
+{
+	iPoint ret(0, 0);
+	// TODO 2: Add orthographic world to map coordinates
+	switch (data.type) {
+	case MAPTYPE_ORTHOGONAL:
+		ret.x = x / data.tile_width;
+		ret.y = y / data.tile_height;
+		break;
+
+	case MAPTYPE_ISOMETRIC:
+
+		ret.x = ((x / (data.tile_width / 2)) + (y / (data.tile_height / 2))) / 2;
+		ret.y = ((y / (data.tile_height / 2)) - (x / (data.tile_width / 2))) / 2;
+		break;
+
+
+	}
+
+	// TODO 3: Add the case for isometric maps to WorldToMap
+	return ret;
 }
 
 

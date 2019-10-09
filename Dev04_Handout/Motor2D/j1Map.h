@@ -15,15 +15,17 @@ struct LayerInfo {
 	uint height = 0u;
 	uint* tileArray = nullptr;
 	~LayerInfo() {};
+
+	const inline uint Get(int x, int y) {
+
+		return (x + y * width);
+
+	};
 };
 // ----------------------------------------------------
 
 	// TODO 6: Short function to get the value of x,y
-const inline uint Get(int x, int y, int tile_w) {
-	
-	return (x + y* tile_w);
 
-};
 
 // ----------------------------------------------------
 struct TileSet
@@ -92,6 +94,8 @@ public:
 	bool Load(const char* path);
 
 	// TODO 8: Create a method that translates x,y coordinates from map positions to world positions
+	iPoint MapToWorld(int x, int y) const;
+	iPoint WorldToMap(int x, int y) const;
 
 private:
 

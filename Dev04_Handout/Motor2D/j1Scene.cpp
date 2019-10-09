@@ -30,7 +30,8 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("hello2.tmx");
+	//App->map->Load("hello2.tmx");
+	App->map->Load("iso.tmx");
 	return true;
 }
 
@@ -64,13 +65,16 @@ bool j1Scene::Update(float dt)
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw();
 
-	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Mouse Position X:%d Y:%d Mouse Tilset:%d,%d Tileset Type:%d",
+
+	iPoint mouseCordinates = App->map->WorldToMap((App->input->mouse_x - App->render->camera.x), (App->input->mouse_y - App->render->camera.y));
+
+	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Mouse Position X:%d Y:%d Mouse Tilset:%d,%d",
 		App->map->data.width, App->map->data.height,
 		App->map->data.tile_width, App->map->data.tile_height,
 		App->map->data.tilesets.count(), App->input->mouse_x - App->render->camera.x,
 		App->input->mouse_y - App->render->camera.y,
-		(App->input->mouse_x - App->render->camera.x) / App->map->data.tile_width,
-		(App->input->mouse_y - App->render->camera.y) / App->map->data.tile_height);
+		mouseCordinates.x,
+		mouseCordinates.y);
 
 	App->win->SetTitle(title.GetString());
 	return true;
