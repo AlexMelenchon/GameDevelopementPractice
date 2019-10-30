@@ -79,9 +79,37 @@ void j1Map::PropagateDijkstra()
 	// TODO 3: Taking BFS as a reference, implement the Dijkstra algorithm
 	// use the 2 dimensional array "cost_so_far" to track the accumulated costs
 	// on each cell (is already reset to 0 automatically)
+	uint current = 0;
 
+	iPoint curr;
+	if (frontier.Pop(curr))
+	{
+		iPoint neighbors[4];
+		neighbors[0].create(curr.x + 1, curr.y + 0);
+		neighbors[1].create(curr.x + 0, curr.y + 1);
+		neighbors[2].create(curr.x - 1, curr.y + 0);
+		neighbors[3].create(curr.x + 0, curr.y - 1);
 
+		for (uint i = 0; i < 4; ++i)
+		{
+
+				if (MovementCost(neighbors[i].x, neighbors[i].y) >= 0 )
+				{
+					int newCost = cost_so_far[curr.x][curr.y] + MovementCost(neighbors[i].x, neighbors[i].y);
+					if (visited.find(neighbors[i]) == -1 || newCost < cost_so_far[neighbors[i].x][neighbors[i].y])
+					{
+						cost_so_far[neighbors[i].x][neighbors[i].y] = newCost;
+						frontier.Push(neighbors[i], newCost);
+						visited.add(neighbors[i]);
+						breadcrumbs.add(curr);
+					}
+				}
+			
+		}
+	}
 }
+
+
 
 int j1Map::MovementCost(int x, int y) const
 {
