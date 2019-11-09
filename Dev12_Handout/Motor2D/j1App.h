@@ -99,7 +99,7 @@ public:
 	uint64 frame_count = 0u;
 	uint last_second_frame_count = 0u;
 
-	uint last_frame_ms = 0u;
+	uint32 last_frame_ms = 0u;
 	uint32 frames_on_last_update = 0u;
 	float dt = 0.0f;
 

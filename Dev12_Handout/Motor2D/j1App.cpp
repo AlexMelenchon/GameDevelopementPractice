@@ -174,7 +174,6 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {
-	dt = lastFrameTimer.ReadMs();
 	lastFrameTimer.Start();
 }
 
@@ -201,6 +200,7 @@ void j1App::FinishUpdate()
 
 	// Amount of ms took the last update
 	last_frame_ms = lastFrameTimer.ReadMs();
+	dt = (float)last_frame_ms/100;
 
 	// Amount of frames during the last second
 	if (lastSecFrames->Read() >= 1000)
@@ -214,7 +214,7 @@ void j1App::FinishUpdate()
 
 
 	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %lu ",
+	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %lu ",
 			  avg_fps, last_frame_ms, frames_on_last_update, dt, seconds_since_startup, frame_count);
 
 	App->win->SetTitle(title);
