@@ -49,8 +49,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// render last to swap buffer
 	AddModule(render);
 
-	LOG("Construct took: %u ms", timer.ReadMs());
-
+	LOG("Construct took: %05u ms", timer.ReadMs());
 
 }
 
@@ -209,9 +208,6 @@ void j1App::FinishUpdate()
 		frames_on_last_update = last_second_frame_count;
 		last_second_frame_count = 0;
 	}
-
-
-
 
 	static char title[256];
 	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %lu ",
